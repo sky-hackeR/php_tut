@@ -30,6 +30,7 @@ $fetchResult =  mysqli_query($connection, $fetchQuery);
             <th>Email</th>
             <th>Date</th>
             <th>Password</th>
+            <th>Action</th>
         </tr>
         <?php while($fetchData = mysqli_fetch_array($fetchResult)) {?>
         <tr>
@@ -38,6 +39,7 @@ $fetchResult =  mysqli_query($connection, $fetchQuery);
             <td><?= $fetchData['email'] ?></td>
             <td><?= $fetchData['date'] ?></td>
             <td><?= $fetchData['password'] ?></td>
+            <td><a href="edit.php?user_id=<?= $fetchData['id'] ?>"</a>Edit</td>
         </tr>
         <?php } ?>
     </table>
