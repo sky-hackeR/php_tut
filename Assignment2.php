@@ -1,16 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$dbpassword= "";
-$dbname = "kode";
-
-
-$connection = mysqli_connect($servername, $username, $dbpassword, $dbname);
-
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include('connection.php');
 
 
 if(isset($_POST['add_record'])){
@@ -46,6 +36,16 @@ if(isset($_POST['add_record'])){
     //     $success = 'Record Inserted Successfully';
     // }else {
     //     $error = 'Error While Inserting Record';
+    // }
+
+    // $getUserSql = "SELECT * FROM users WHERE email = '$email' and password = '$password'";
+    // $getUserResult = mysqli_query($connection, $getUserSql);
+    // $userRecord = mysqli_fetch_assoc($getUserResult);
+    
+    // if($userRecord){
+    //     $user = $userRecord['name'];
+    // }else{
+    //     echo "User not found";
     // }
 
 }
