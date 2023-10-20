@@ -65,9 +65,9 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
 
         .inputbox label{
             position: absolute;
-            top: 50%;
+            top: -50%;
             left: 5px;
-            transform: translateY(-50%);
+            /* transform: translateY(-50%); */
             color: #fff;
             font-size: 1em;
             pointer-events: none;
@@ -96,28 +96,6 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
             color: #fff;
             font-size: 1.2em;
             top: 20px;
-        }
-
-        .forget{
-            margin: -15px 0 15px;
-            font-size: .9em;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-        }
-
-        .forget label input{
-            margin-right: 3px;
-
-        }
-
-        .forget label a{
-            color: red;
-            text-decoration: none;
-        }
-
-        .forget label a:hover{
-            text-decoration: underline;
         }
 
         button{
@@ -168,25 +146,25 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
                     <h2>SignUp</h2>
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
-                        <input type="text" name="firstname" required>
+                        <input type="text" name="firstname" placeholder="<?= $fetchUserData['firstname']?>" required>
                         <label for="">Firstname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
-                        <input type="text" name="lastname" required>
+                        <input type="text" name="lastname" placeholder="<?= $fetchUserData['lastname']?>" required>
                         <label for="">Lastname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-calendar"></i>
-                        <input name="date" type="text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" required>
+                        <input name="date" type="text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" placeholder="<?= $fetchUserData['date']?>" required>
                         <label for="">Date Of Birth:</label>
                     </div> 
                     <div class="inputbox">
                         <i class="bi bi-envelope-at"></i>
-                        <input type="email" name="email" id="email" required>
+                        <input type="email" name="email" id="email" placeholder="<?= $fetchUserData['email']?>" required>
                         <label for="">Email:</label>
                     </div>
-                    <div class="inputbox">
+                    <!-- <div class="inputbox">
                         <i class="bi bi-lock"></i>
                         <input type="password" name="password" id="password" required>
                         <label for="">Password:</label>
@@ -195,7 +173,7 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
                         <i class="bi bi-lock-fill"></i>
                         <input type="password" name="confirm_password" id="confirm_password" required>
                         <label for="">Confirm Password:</label>
-                    </div>
+                    </div> -->
                     <button type="submit" name="add_record">Sign Up</button>
                 </form>
             </div>
