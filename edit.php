@@ -1,15 +1,43 @@
 <?php
 include('connection.php');
 
-$userId = $_GET['user_id'];
+if(isset($_POST['update_record'])){
+    $firstname = mysqli_escape_string($connection, $_POST['firstname']);
+    $lastname = mysqli_escape_string($connection, $_POST['lastname']);
+    $date = mysqli_escape_string($connection, $_POST['date']);
+    $email = mysqli_escape_string($connection, $_POST['email']);
+    $password = mysqli_escape_string($connection, $_POST['password']);
+    $confirm_password = mysqli_escape_string($connection, $_POST['confirm_password']);
+    $userId = mysqli_escape_string($connection, $_POST['user_id']);
+
+    $formattedDate = date('Y-m-d', strtotime($date));
+
+    $error = null;
+    $success = null;
+    $pass = null;
+
+    if($password != $confirm_password){
+        $error = 'password mismatch';
+    }else{
+        $pass = md5($password);
+    }
+
+    $updateQuery = "UPDATE users SET firstname = '$firstname', lastname = '$lastname', email = '$email' WHERE id = '$userId'";
+    $resultQuery = mysqli_query($connection, $updateQuery);
+    if ($resultQuery) {
+        $success = 'Changes saved successfully';
+    }else{
+        $error = 'Error While Updating Record';
+    }
+}
+
+$userId = isset($_POST['user_id'])?$_POST['user_id']:$_GET['user_id'];
 
 // echo $userId
 
 $fetchUser = "SELECT * FROM users WHERE id = '$userId'";
 $fetchUserResult = mysqli_query($connection, $fetchUser);
 $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
-
-
 
 
 ?>
@@ -142,29 +170,30 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="Assignment2.php" method="POST">
+                <form action="edit.php" method="POST">
+                    <input type="hidden" name="user_id" value="<?= $fetchUserData['id']?>">
                     <h2>SignUp</h2>
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
-                        <input type="text" name="firstname" placeholder="<?= $fetchUserData['firstname']?>" required>
+                        <input type="text" name="firstname" value="<?= $fetchUserData['firstname']?>" required>
                         <label for="">Firstname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
-                        <input type="text" name="lastname" placeholder="<?= $fetchUserData['lastname']?>" required>
+                        <input type="text" name="lastname" value="<?= $fetchUserData['lastname']?>" required>
                         <label for="">Lastname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-calendar"></i>
-                        <input name="date" type="text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" placeholder="<?= $fetchUserData['date']?>" required>
+                        <input name="date" type="text" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" value="<?= $fetchUserData['date']?>" required>
                         <label for="">Date Of Birth:</label>
                     </div> 
                     <div class="inputbox">
                         <i class="bi bi-envelope-at"></i>
-                        <input type="email" name="email" id="email" placeholder="<?= $fetchUserData['email']?>" required>
+                        <input type="email" name="email" id="email" value="<?= $fetchUserData['email']?>" required>
                         <label for="">Email:</label>
                     </div>
-                    <!-- <div class="inputbox">
+                    <div class="inputbox">
                         <i class="bi bi-lock"></i>
                         <input type="password" name="password" id="password" required>
                         <label for="">Password:</label>
@@ -173,8 +202,8 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
                         <i class="bi bi-lock-fill"></i>
                         <input type="password" name="confirm_password" id="confirm_password" required>
                         <label for="">Confirm Password:</label>
-                    </div> -->
-                    <button type="submit" name="add_record">Sign Up</button>
+                    </div>
+                    <button type="submit" name="update_record">Save Changes</button>
                 </form>
             </div>
         </div>
@@ -198,7 +227,8 @@ $fetchUserData = mysqli_fetch_assoc($fetchUserResult);
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <?php } else ?>
+    <?php } else {?>
         <h1>User not found</h1>
+    <?php } ?>
 </body>
 </html>
