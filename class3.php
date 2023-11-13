@@ -1,6 +1,30 @@
 <?php
 include('connection.php');
 
+if(isset($_POST['delete_user'])){
+    $userId = mysqli_escape_string($connection, $_POST['user_id']);
+
+    $deleteUserQuery = "DELETE FROM users WHERE id = '$userId'";
+    $deleteUserResult = mysqli_query($connection, $deleteUserQuery);
+
+
+    if($deleteUserResult){
+        $error = null;
+        $success = null;
+
+        if($password != $confirm_password){
+            $error = 'password mismatch';
+        }else{
+            $pass = md5($password);
+        }
+    }
+
+
+}
+
+
+
+
 $userCount = 1;
 
 $fetchQuery = "SELECT * FROM users";
@@ -40,6 +64,11 @@ $fetchResult =  mysqli_query($connection, $fetchQuery);
             <td><?= $fetchData['date'] ?></td>
             <td><?= $fetchData['password'] ?></td>
             <td><a href="edit.php?user_id=<?= $fetchData['id'] ?>"</a>Edit</td>
+
+            <form action="class3.php" method="POST" enctype="multipart/form">
+            <input type="hidden" name="user_id" value="<?= $fetchData['user_id']?>">
+                <button style="background-color: red; color: #fff; border: 1px solid red; border-radius: 5px; padding:" type="submit" name="delete-user">Delete</button>
+            </form>
         </tr>
         <?php } ?>
     </table>
