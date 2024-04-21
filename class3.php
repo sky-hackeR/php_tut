@@ -1,26 +1,26 @@
 <?php
 include('connection.php');
 
-// if(isset($_POST['delete_user'])){
-//     $userId = mysqli_escape_string($connection, $_POST['user_id']);
+if(isset($_POST['delete_user'])){
+    $userId = mysqli_escape_string($connection, $_POST['user_id']);
 
-//     $deleteUserQuery = "DELETE FROM users WHERE id = '$userId'";
-//     $deleteUserResult = mysqli_query($connection, $deleteUserQuery);
-
-
-//     if($deleteUserResult){
-//         $error = null;
-//         $success = null;
-
-//         if($password != $confirm_password){
-//             $error = 'password mismatch';
-//         }else{
-//             $pass = md5($password);
-//         }
-//     }
+    $deleteUserQuery = "DELETE FROM users WHERE id = '$userId'";
+    $deleteUserResult = mysqli_query($connection, $deleteUserQuery);
 
 
-// }
+    if($deleteUserResult){
+        $error = null;
+        $success = null;
+
+        if($password != $confirm_password){
+            $error = 'password mismatch';
+        }else{
+            $pass = md5($password);
+        }
+    }
+
+
+}
 
 
 
