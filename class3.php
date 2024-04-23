@@ -63,12 +63,12 @@ $fetchResult =  mysqli_query($connection, $fetchQuery);
             <td><?= $fetchData['email'] ?></td>
             <td><?= $fetchData['date'] ?></td>
             <td><?= $fetchData['password'] ?></td>
-            <td><a href="edit.php?user_id=<?= $fetchData['id'] ?>"</a>Edit</td>
-
-            <form action="class3.php" method="POST" enctype="multipart/form">
-            <input type="hidden" name="user_id" value="<?= $fetchData['user_id']?>">
-                <button style="background-color: red; color: #fff; border: 1px solid red; border-radius: 5px; padding:" type="submit" name="delete-user">Delete</button>
-            </form>
+            <td><a href="edit.php?user_id=<?= $fetchData['id'] ?>"</a>Edit
+                <form action="class3.php" method="POST" enctype="multipart/form">
+                    <input type="hidden" name="user_id" value="<?= $fetchData['user_id']?>">
+                    <button style="background-color: red; color: #fff; border: 1px solid red; border-radius: 5px; padding:" type="submit" name="delete-user">Delete</button>
+                </form>
+            </td>
         </tr>
         <?php } ?>
     </table>

@@ -206,12 +206,12 @@ if(isset($_POST['add_record'])){
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
                         <input type="text" name="firstname" required>
-                        <label for="">Firstname:</label>
+                        <label for="firstname">Firstname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-person-fill"></i>
                         <input type="text" name="lastname" required>
-                        <label for="">Lastname:</label>
+                        <label for="lastname">Lastname:</label>
                     </div>
                     <div class="inputbox">
                         <i class="bi bi-calendar"></i>
